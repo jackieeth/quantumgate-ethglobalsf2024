@@ -35,7 +35,7 @@ module.exports = {
       url: `https://testnet.skalenodes.com/v1/juicy-low-small-testnet`,
       accounts:[`0x${process.env.DEPLOYER}`]
     },
-    rskTestnet: {
+    rsktest: {
       url: `https://rpc.testnet.rootstock.io/${process.env.RSK_RPC_KEY}`,
       chainId: 31,
       gasPrice: 60000000,
