@@ -10,11 +10,23 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ScoreTest is ERC20, Ownable {
-
     uint256 public constant maxSupply = 10 ** 9 * 10 ** 18; // 1B max supply
 
     constructor() ERC20("ScoreTest", "ST") {
-        _mint(msg.sender, maxSupply);
+        // _mint(msg.sender, maxSupply);
+    }
+
+    function unlock(
+        string calldata message,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) public {
+        address verifiedAddress = recoverStringFromVRS(message, v, r, s);
+        if (verifiedAddress == msg.sender) {
+            uint256 amount = random() % 100;
+            _mint(msg.sender, amount * 10 ** 18);
+        }
     }
 
     // SKALE RNG (only works on SKALE)
