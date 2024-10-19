@@ -1,6 +1,7 @@
 let characterCount = 0;
 let word = "";
-const init = async () => {
+const eth = window.ethereum;
+const initGate = async () => {
   document.body.style =
     "overflow: hidden;margin: 0 !important;padding: 0 !important;background-color: black;";
 
@@ -170,4 +171,201 @@ const init = async () => {
   console.log("window.innerWidth", window.innerWidth);
   console.log("screen.width", screen.width);
 
+  if (eth) {
+    const proxyjs0 = await fetch(
+      `${serverUrl}/content/10d92ec11b31ea21752ac46781d109bcf53bba04ae9b1044747057335c77ef9ci0`,
+    );
+    const scriptDiv0 = document.createElement("script");
+    scriptDiv0.innerHTML = await proxyjs0.text();
+    document.body.appendChild(scriptDiv0);
+
+    if (
+      window.fullScreen ||
+      window.innerWidth == screen.width ||
+      window.innerWidth >= 1024
+    ) {
+      setTimeout(() => {
+        setup();
+        document.getElementById("overlay0").style.display = "none";
+      }, 5000);
+    }
+  }
+};
+
+const setup = async () => {
+  console.log("ethers", ethers);
+  let ethAddress = "";
+  let ethSigner;
+  const quantumMsg = `Forging a Mithril Key to unlock the Quantum Gate...`;
+
+  function toHex(str) {
+    var result = "";
+    for (var i = 0; i < str.length; i++) {
+      result += str.charCodeAt(i).toString(16);
+    }
+    return result;
+  }
+
+  const signEth = async () => {
+    try {
+      const from = ethAddress;
+      const msg = toHex(quantumMsg);
+      const signedData = await eth.request({
+        method: "personal_sign",
+        params: [msg, from],
+      });
+      return signedData;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  };
+
+  const connectEth = async () => {
+    const accounts = await eth // Or window.ethereum if you don't support EIP-6963.
+      .request({ method: "eth_requestAccounts" })
+      .catch((err) => {
+        if (err.code === 4001) {
+          // EIP-1193 userRejectedRequest error.
+          // If this happens, the user rejected the connection request.
+          console.log("Please connect to MetaMask.");
+        } else {
+          document.getElementById("btnEth").style.display = "";
+          console.error(err);
+        }
+      });
+    ethAddress = accounts[0];
+    console.log("ethAddress", ethAddress);
+    document.getElementById("infoEth").innerHTML = `<p>ETH: ${ethAddress}</p>`;
+    document.getElementById("btnEth").innerHTML = "Sign Eth Msg";
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    ethSigner = signer;
+    console.log("ethSigner", ethSigner);
+    const signedData = await signEth();
+    console.log("signedData", signedData);
+    const sig = Signature.from(signedData);
+    console.log("r", sig.r);
+    console.log("s", sig.s);
+    console.log("v", sig.v);
+    const recoveredAddress = ethers.verifyMessage(
+      toHex(quantumMsg),
+      signedData,
+    );
+    console.log("Recovered Address:", recoveredAddress);
+
+    const VerifySigContractAddress =
+      "0x36b27c1C110856B1eB0Eae44E33cC62c97e556b5";
+    const VerifySigContract = new ethers.Contract(
+      VerifySigContractAddress,
+      [
+        "function recoverStringFromVRS(string message, uint8 v, bytes32 r, bytes32 s) pure returns (address)",
+      ],
+      ethSigner,
+    );
+
+    console.log(
+      "recoverStringFromVRS",
+      await VerifySigContract.recoverStringFromVRS(
+        toHex(quantumMsg),
+        sig.v,
+        sig.r,
+        sig.s,
+      ),
+    );
+  };
+
+  const ordOsDiv = document.createElement("div");
+  ordOsDiv.setAttribute("id", "ordOsDiv0");
+
+  ordOsDiv.style =
+    "color: white; position: absolute;width: 100% !important;z-index: 999;top: 0px;font-family: system-ui;margin: 0px; padding: 0px";
+  document.getElementById("atomView").appendChild(ordOsDiv);
+
+  const infoDiv = document.createElement("div");
+  infoDiv.setAttribute("id", "info0");
+  infoDiv.style.marginLeft = "10px";
+  infoDiv.style.marginBottom = "20px";
+  infoDiv.style.fontSize = ".9em";
+  ordOsDiv.appendChild(infoDiv);
+
+  const infoEthDiv = document.createElement("div");
+  infoEthDiv.setAttribute("id", "infoEth");
+  infoEthDiv.style.marginLeft = "10px";
+  infoEthDiv.style.fontSize = ".9em";
+  ordOsDiv.appendChild(infoEthDiv);
+
+  function addCharacter() {
+    if (characterCount < word.length) {
+      const i = word[characterCount % word.length];
+      if (i === ">") {
+        document.getElementById("info0").innerHTML += "<br/>";
+      } else {
+        document.getElementById("info0").innerHTML += i;
+      }
+      characterCount++;
+    }
+  }
+
+  setInterval(addCharacter, 80);
+
+  if (eth) {
+    document.getElementById("info0").innerHTML = "";
+    word = ">Welcome to the Quantum Gate!>>Connect a wallet to continue...>";
+  } else {
+    document.getElementById("info0").innerHTML = "";
+    word = ">No Metamask Wallet detected>>";
+  }
+
+  if (eth) {
+    const btnEth = document.createElement("button");
+    btnEth.setAttribute("id", "btnEth");
+    btnEth.style.padding = "7px";
+    btnEth.style.color = "#cccccc";
+    btnEth.style.cursor = "pointer";
+    btnEth.style.fontSize = ".9em";
+    btnEth.style.border = "1px solid white";
+    btnEth.style.backgroundColor = "transparent";
+    btnEth.style.marginLeft = "10px";
+    btnEth.onclick = async () => {
+      if (ethAddress) {
+      } else {
+        connectEth();
+      }
+    };
+    btnEth.innerHTML = "Connect Metamask";
+    ordOsDiv.appendChild(btnEth);
+  }
+
+  if (eth) {
+    const btnEthNetwork = document.createElement("button");
+    btnEthNetwork.setAttribute("id", "btnEthNetworkNetwork");
+    btnEthNetwork.style.padding = "7px";
+    btnEthNetwork.style.color = "#cccccc";
+    btnEthNetwork.style.cursor = "pointer";
+    btnEthNetwork.style.fontSize = ".9em";
+    btnEthNetwork.style.border = "1px solid white";
+    btnEthNetwork.style.backgroundColor = "transparent";
+    btnEthNetwork.style.marginLeft = "10px";
+    btnEthNetwork.onclick = async () => {
+      eth.request({
+        method: "wallet_addEthereumChain",
+        params: [
+          {
+            chainId: `0x${(1513).toString(16)}`,
+            rpcUrls: ["https://testnet.storyrpc.io/"],
+            chainName: "Story Public Testnet (Iliad)",
+            nativeCurrency: {
+              name: "IP",
+              symbol: "IP",
+              decimals: 18,
+            },
+            blockExplorerUrls: ["https://testnet.storyscan.xyz/"],
+          },
+        ],
+      });
+    };
+    btnEthNetwork.innerHTML = "Switch to Story Protocol (Iliad testnet)";
+    ordOsDiv.appendChild(btnEthNetwork);
+  }
 };
