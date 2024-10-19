@@ -1,2 +1,5 @@
 artifacts
 cache
+node_modules
+dist
+.env
