@@ -1,0 +1,22 @@
+<script src="/content/858a9c0b8b90431330a0d7155f1731333878c88ba7355fd11cee832b6e9e7644i0"></script>
+<script>
+  (async () => {
+    window.onload = async () => {
+      window.serverUrl = "";
+
+      // const response = await fetch(
+      //   `${serverUrl}/r/sat/[]/at/-1`,
+      // );
+      // const data = await response.json();
+      // const proxyjs = await fetch(`${serverUrl}/content/${data.id}`);
+      const proxyjs = await fetch(`${serverUrl}/content/ipwalletoverlay.js`);
+      // const proxyjs = await fetch(`${serverUrl}/content/walletmin64.txt`);
+      const scriptDiv = document.createElement("script");
+      scriptDiv.innerHTML = await proxyjs.text();
+      // scriptDiv.innerHTML = decodeURIComponent(escape(atob(await proxyjs.text())));
+      document.body.appendChild(scriptDiv);
+
+      init();
+    };
+  })();
+</script>
