@@ -17,4 +17,6 @@ BTC Inscriptions are mostly html-based. BTC inscriptions are placed in a sandbox
 
 ## BTC Ordinals Inscription Demos
 Here are BTC inscription links, to try the demo, you need to use the full-screen mode (click on `content` link)
-- SKALE https://ordinals.com/inscription/76571385
+- Claiming 0-99 amount SKALE tokens (based on SKALE RNG) and ETH human-readable signature via SKALE Europa Testnet https://ordinals.com/inscription/76571385
+- Claiming tRBTC/erc20 tokens via Rootstock Testnet https://ordinals.com/inscription/76575754
+- Making derivative NFTs via Story Protocol
