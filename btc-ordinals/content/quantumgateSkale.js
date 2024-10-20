@@ -171,17 +171,17 @@ const setup = async () => {
     );
     console.log("Recovered Address:", recoveredAddress);
 
-    const VerifySigContractAddress =
-      "0x9385A660b79D451e61D7A16Aa5cB7E1a65817e4f";
-    const VerifySigContract = new ethers.Contract(
-      VerifySigContractAddress,
+    const VerifySigOFTContractAddress =
+      "0x9DE5B0CF9C58C3254637Bc031f594FD32DC1Bb7A";
+    const VerifySigOFTContract = new ethers.Contract(
+      VerifySigOFTContractAddress,
       [
-        "function unlock(string message, uint8 v, bytes32 r, bytes32 s) public returns ()",
+        "function mint(string message, uint8 v, bytes32 r, bytes32 s) public returns ()",
       ],
       ethSigner,
     );
 
-    const tx = await VerifySigContract.unlock(
+    const tx = await VerifySigOFTContract.mint(
       toHex(quantumMsg),
       sig.v,
       sig.r,
@@ -190,10 +190,10 @@ const setup = async () => {
     if (tx && tx.hash) {
       console.log("tx hash", tx.hash);
       document.getElementById("infoEth").innerHTML =
-        `<p style="color: #999999">Verifying signed messages...<br/>Minting 0-99 tokens using SKALE RNG via Europa Hub Testnet...<br/>Just a moment...<br/>And, Good Luck!</p>`;
+        `<p style="color: #999999">Verifying signed messages...<br/>Minting 0-99 OFT tokens using SKALE RNG and LayerZero via Europa Hub Testnet...<br/>Just a moment...<br/>And, Good Luck!</p>`;
       await tx.wait();
       document.getElementById("infoEth").innerHTML =
-        `<p style="color: #999999">TX: ${tx.hash} via Europa Hub Testnet<br/><br/><b style="color: white">You unlocked the Quantum Gate!</b></p>`;
+        `<p style="color: #999999">TX: ${tx.hash} via Europa Hub Testnet<br/><br/><b style="color: white">You unlocked the Quantum Gate from BTC with SKALE and LayerZero!</b></p>`;
       console.log("done");
     }
   };
