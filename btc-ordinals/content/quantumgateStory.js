@@ -89,7 +89,7 @@ const initGate = async () => {
 const setup = async () => {
   let ethAddress = "";
   let ethSigner;
-  const quantumMsg = `Forging a Mithril Key to unlock the Quantum Gate...`;
+  const quantumMsg = `Forging a Mithril Key to unlock the Quantum Gate for more IPs...`;
 
   function toHex(str) {
     var result = "";
@@ -162,26 +162,21 @@ const setup = async () => {
     );
     console.log("Recovered Address:", recoveredAddress);
 
-    const VerifySigContractAddress =
-      "0x9385A660b79D451e61D7A16Aa5cB7E1a65817e4f";
-    const VerifySigContract = new ethers.Contract(
-      VerifySigContractAddress,
+    const IPContractAddress = "0x1e7e036bD54Ac69f23cFC9606c569769e9EE08Cf";
+    const IPContract = new ethers.Contract(
+      IPContractAddress,
       [
-        "function unlock(string message, uint8 v, bytes32 r, bytes32 s) public returns ()",
+        "function mintLicenseToken(uint256 ltAmount, address ltRecipient) external returns (address ipId, uint256 tokenId, uint256 startLicenseTokenId)",
       ],
       ethSigner,
     );
 
-    const tx = await VerifySigContract.unlock(
-      toHex(quantumMsg),
-      sig.v,
-      sig.r,
-      sig.s,
-    );
+    const tx = await IPContract.mintLicenseToken(1, recoveredAddress);
+
     if (tx && tx.hash) {
       console.log("tx hash", tx.hash);
       document.getElementById("infoEth").innerHTML =
-        `<p style="color: #999999">Verifying signed messages...<br/>Minting an IP licensing token via Story Protocol (Iliad testnet)<br/>Just a moment...</p>`;
+        `<p style="color: #999999">Verifying signed messages...<br/>Minting an IP license token via Story Protocol (Iliad testnet)<br/>Just a moment...</p>`;
       await tx.wait();
       document.getElementById("infoEth").innerHTML =
         `<p style="color: #999999">TX: ${tx.hash} via Story Protocol (Iliad testnet)<br/><br/><b style="color: white">You unlocked the Quantum Gate!</b></p>`;
