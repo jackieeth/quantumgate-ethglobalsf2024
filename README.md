@@ -10,3 +10,7 @@ Quantum Gate unlocks EVM utilities on BTC Ordinals inscriptions. This is an ETH 
 ## Quick Start (wip)
 - BTC inscription local test: go to `btc-ordinals` and run `python -m http.server` then go to `/content/quantumbase.html`
 - EVM contract deployment: go to `evm-contract`, `yarn` or `npm i` to install, setup `.env`, and deploy `npx hardhat run scripts\deploy_ScoreTest.js --network storytest` (this will deploy on Story Testnet)
+
+## BTC Ordinals Inscription Demos
+Here are BTC inscription links, to try the demo, you need to use the full-screen mode (click on `content` link)
+- SKALE https://ordinals.com/inscription/315eaf09f4df10845906a1f802d487b11585852c3801314271fb853aba70bec6i0
