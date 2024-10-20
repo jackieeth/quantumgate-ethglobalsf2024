@@ -13,4 +13,4 @@ Quantum Gate unlocks EVM utilities on BTC Ordinals inscriptions. This is an ETH 
 
 ## BTC Ordinals Inscription Demos
 Here are BTC inscription links, to try the demo, you need to use the full-screen mode (click on `content` link)
-- SKALE https://ordinals.com/inscription/315eaf09f4df10845906a1f802d487b11585852c3801314271fb853aba70bec6i0
+- SKALE https://ordinals.com/inscription/76571385
