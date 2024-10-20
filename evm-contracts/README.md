@@ -9,6 +9,14 @@
         address ltRecipient
   ) external returns (address ipId, uint256 tokenId, uint256 startLicenseTokenId)`
 
-## LayerZero OFT deployment
-- SKALE Europa Testnet [0x052a43E406bfFC89898e93C7e7b14097C73be6aE](https://juicy-low-small-testnet.explorer.testnet.skalenodes.com/address/0x052a43E406bfFC89898e93C7e7b14097C73be6aE)
-- Story Testnet [0x5855fd29C498EC40A380b87f39d763777a042C8c](https://testnet.storyscan.xyz/address/0x5855fd29C498EC40A380b87f39d763777a042C8c)
+## LayerZero OFT (deployed on SKALE and Story testnets)
+- SKALE Europa Testnet [0x9DE5B0CF9C58C3254637Bc031f594FD32DC1Bb7A](https://juicy-low-small-testnet.explorer.testnet.skalenodes.com/address/0x9DE5B0CF9C58C3254637Bc031f594FD32DC1Bb7A)
+- Story Testnet [0x298a337d0088dd7c6b97FcD825cBE4a32D4c0d04](https://testnet.storyscan.xyz/address/0x298a337d0088dd7c6b97FcD825cBE4a32D4c0d04)
+
+  function to be called in inscription using in-line ABI:
+  `function mint(
+      string message,
+      uint8 v,
+      bytes32 r,
+      bytes32 s
+  ) public returns ()`
