@@ -1,11 +1,11 @@
 # Quantum Gate 
-Quantum Gate unlocks EVM utilities on BTC Ordinals inscriptions. This is an ETH Global SF Hackathon 2024 project.
+Quantum Gate unlocks EVM utilities on BTC Ordinals inscriptions. Go to the full-screen mode to connect your MetaMask wallet and call smart contracts from Quantum Gate inscriptions. This is an ETH Global SF Hackathon 2024 project.
 
 ## Description
-NFT liquidity has gone to BTC Ordinals. What if we have ways to bring the liquidity back to the EVM ecosystem? This is an experimental project for showcasing EVM smart contract calls inside BTC Ordinals inscriptions. A MetaMask user visits a Quantum Gate inscription page and switches to a full-screen mode. S/he clicks on the "unlock" button and connects a wallet. The inscription prompts the user to sign a human-readable message and submit that signature to an EVM smart contract. The contract got called successfully and more EVM utilities were unlocked on Quantum Gate's BTC inscriptions.
+NFT liquidity has gone to BTC Ordinals. What if we can bring liquidity back to the EVM ecosystem? This is an experimental project that showcases EVM smart contract calls inside BTC Ordinals inscriptions. A MetaMask user visits a Quantum Gate inscription page and switches to a full-screen mode. S/he clicks on the "unlock" button and connects a wallet. The inscription prompts the user to sign a human-readable message and submit that signature to an EVM smart contract. The contract got called successfully and more EVM utilities were unlocked on Quantum Gate's BTC inscriptions.
 
 ## How it works (wip)
-BTC Inscriptions are mostly html-based. BTC inscriptions are placed in a sandbox environment so that no external server calls are allowed. However, wallets such as MetaMask are injecting codes through web browsers. This provides an opportunity to place smart contract calls within BTC inscriptions.
+BTC Inscriptions are mostly HTML-based. They are placed in a sandbox environment so that no external server calls are allowed. However, wallets such as MetaMask inject codes through web browsers, which provides an opportunity to place smart contract calls within BTC inscriptions.
 1. This app is a BTC inscription (to be inscribed soon). This inscription lives on the BTC blockchain.
 2. A user visits the inscription page hosted by any BTC Ordinals explorer such as ordinals.com.
 3. This inscription uses ethersjs ([inscribed](https://ordinals.com/inscription/10d92ec11b31ea21752ac46781d109bcf53bba04ae9b1044747057335c77ef9ci0)) for a user to connect a Metamask wallet and call EVM smart contract functions within the sandboxed BTC inscription.
